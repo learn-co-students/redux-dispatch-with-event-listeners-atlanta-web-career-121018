@@ -237,3 +237,40 @@ problem.
 
 As for new information, we saw that we can get the user to call the `dispatch`
 method, by executing `dispatch` from inside the callback of an event handler.
+
+// add code snippets from README
+
+
+// let state = {count: 0}
+
+let state;
+function reducer(state={ count: 0 }, action) {
+    switch (action.type) {
+        case 'INCREASE_COUNT':
+            return { count: state.count + 1 }
+        default:
+            return state;
+    }
+}
+
+function dispatch(action) {
+    state = reducer(state, action);
+}
+
+function render() {
+    let container = document.getElementById('container');
+    container.textContent = state.count;
+}
+
+function dispatch(action) {
+    state = reducer(state, action);
+    render();
+}
+
+dispatch({ type: '@@INIT' })
+
+let button = document.getElementById('button');
+
+button.addEventListener('click', function () {
+    dispatch({ type: 'INCREASE_COUNT' }), console.log(state)
+})
